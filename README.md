@@ -6,6 +6,11 @@ Automagically turns FCPX chapter markers into a list of YouTube timestamp links.
 
     python fcpx_xml_chapter_marker_parser.py your_fcpx_xml_export_path
 
+# How-To Video
+
+The how-to video is in Korean with English Subtitles
+
+https://youtu.be/sx4fB5s2Pl8
 
 # Developer
  
