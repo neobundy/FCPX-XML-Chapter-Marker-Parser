@@ -2,6 +2,15 @@
 # Wankyu Choi - Creative Works of Knowledge 2019
 # https://www.youtube.com/wankyuchoi
 #
+# Final Cut XML Chapter Marker Parser is free software: you can use it, redistribute it and/or modify it under the terms of the GNU General Public License (GPL) as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+#
+# Final Cut XML Chapter Marker Parser is distributed in the hope that it will be useful, but without any warranty; without even the implied warranty of merchantability or fitness for a particular purpose. See the GNU General Public License for more details.
+
+#
+# Final Cut XML Chapter Marker Parser for YouTube Timestamp Links
+#
+# Automagically turns FCPX chapter markers into a list of YouTube timestamp links.
+#
 
 import sys, datetime
 from xml.etree.ElementTree import parse
@@ -43,8 +52,15 @@ class Marker:
             pass
 
         m = []
+
+        # only picks up chapter markers
+        # example:
+        #  <chapter-marker start="29100071/8000s" duration="1001/24000s" value="Chapter 1" posterOffset="11/24s"/>
+
         if 'chapter-marker' == element.tag:
             m.append(Marker(element.attrib['value'], start + sum(time)))
+
+        # sums up the offset from the other tags
         else:
             time.append(offset - start)
             for el in element:
@@ -72,9 +88,12 @@ def main():
 
         markers = sorted(Marker.find_chapter_marker(xmlroot), key=lambda s: s.start_time)
 
-        marker_dict = {}
+        # a dictionary is used to leave only the final (unique) chapter markers
 
+        marker_dict = {}
         for m in markers:
+            # we don't need the trailing frame part for youtube timestamp links, hence the split('.')
+
             marker_dict[m.name], frame = str(datetime.timedelta(seconds=m.start_time)).split('.')
 
         for name, start_time in marker_dict.items():
