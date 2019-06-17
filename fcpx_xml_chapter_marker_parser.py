@@ -94,7 +94,10 @@ def main():
         for m in markers:
             # we don't need the trailing frame part for youtube timestamp links, hence the split('.')
 
-            marker_dict[m.name], frame = str(datetime.timedelta(seconds=m.start_time)).split('.')
+            try:
+                marker_dict[m.name], frame = str(datetime.timedelta(seconds=m.start_time)).split('.')
+            except ValueError:
+                marker_dict[m.name] = str(datetime.timedelta(seconds=m.start_time))
 
         for name, start_time in marker_dict.items():
             print("{} {}".format(name, start_time))
