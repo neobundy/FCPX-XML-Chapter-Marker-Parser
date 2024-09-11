@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # Wankyu Choi - Creative Works of Knowledge 2019
-# https://www.youtube.com/wankyuchoi
 #
 # Final Cut XML Chapter Marker Parser is free software: you can use it, redistribute it and/or modify it under the terms of the GNU General Public License (GPL) as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 #
